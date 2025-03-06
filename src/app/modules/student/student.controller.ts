@@ -1,49 +1,51 @@
-import { Request, Response } from 'express';
 import { studentService } from './student.service';
+import catchAsync from '../../utilits/catchAsync';
 
-const createStudent = async (req: Request, res: Response) => {
-  try {
-    const student = req.body.student;
-    const result = await studentService.createStudentIntoDb(student);
+const getSingleStudents = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const result = await studentService.getSingleStudentsFromDb(id);
 
-    res.status(200).json({
-      SUCCESS: true,
-      message: 'Student created successfully',
-      data: result,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-const getStudents = async (req: Request, res: Response) => {
-  try {
-    const result = await studentService.getStudentsFromDb();
+  res.status(200).json({
+    SUCCESS: true,
+    message: 'Students fetched successfully',
+    data: result,
+  });
+});
+const getStudents = catchAsync(async (req, res) => {
+  const result = await studentService.getStudentsFromDb(req.query);
 
-    res.status(200).json({
-      SUCCESS: true,
-      message: 'Students fetched successfully',
-      data: result,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-const getSingleStudents = async (req: Request, res: Response) => {
-  try {
-    const studentId = req.params.id;
-    const result = await studentService.getSingleStudentsFromDb(studentId);
+  res.status(200).json({
+    SUCCESS: true,
+    message: 'Students fetched successfully',
+    data: result,
+  });
+});
+const deleteStudent = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await studentService.deleteStudentsFromDb(id);
 
-    res.status(200).json({
-      SUCCESS: true,
-      message: 'Students fetched successfully',
-      data: result,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+  res.status(200).json({
+    SUCCESS: true,
+    message: 'Deleted student successfully',
+    data: result,
+  });
+});
+const updateStudent = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const students = req.body;
+
+  const result = await studentService.updateStudentsFromDb(id, students);
+
+  res.status(200).json({
+    SUCCESS: true,
+    message: 'Updated student successfully',
+    data: result,
+  });
+});
 export const studentController = {
-  createStudent,
   getStudents,
   getSingleStudents,
+  deleteStudent,
+  updateStudent,
 };

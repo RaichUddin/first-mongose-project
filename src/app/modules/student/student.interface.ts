@@ -1,14 +1,16 @@
+import { Types } from 'mongoose';
+
 export type Guardian = {
   fatherName: string;
-  fatherOcupasion: string;
+  fatherOccupation: string;
   fatherContactNumber: string;
   motherName: string;
-  motherOcupasion: string;
+  motherOccupation: string;
   motherContactNumber: string;
 };
 export type LocalGuardian = {
   name: string;
-  ocupasion: string;
+  occupation: string;
   contactNumber: string;
   address: string;
 };
@@ -18,8 +20,10 @@ export type UserName = {
   lastName: string;
 };
 
-export type Student = {
+export type TStudent = {
+  password: string;
   id: string;
+  user: Types.ObjectId;
   name: UserName;
 
   email: string;
@@ -33,5 +37,7 @@ export type Student = {
   guardian: Guardian;
   localGuardian: LocalGuardian;
   profileImage: string;
-  isActive: 'active' | 'inactive';
+  isDeleted: boolean;
+  admissionSemester: Types.ObjectId;
+  academicDepartment: Types.ObjectId;
 };
