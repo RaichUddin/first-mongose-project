@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 
 import { model, Schema } from 'mongoose';
-import { TAcademicSemister } from './academicsemister.interface';
+import { TAcademicSemester } from './academicsemister.interface';
 import { academicName, months, semisterCode } from './academic.constant';
 
-const academicSemisterSchema = new Schema<TAcademicSemister>(
+const academicSemesterSchema = new Schema<TAcademicSemester>(
   {
     name: { type: String, enum: academicName, required: true },
     code: { type: String, enum: semisterCode, required: true },
@@ -17,7 +17,7 @@ const academicSemisterSchema = new Schema<TAcademicSemister>(
   },
 );
 
-academicSemisterSchema.pre('save', async function (next) {
+academicSemesterSchema.pre('save', async function (next) {
   const isSemesterExists = await AcademicSemisterModel.findOne({
     year: this.year,
     name: this.name,
@@ -28,7 +28,7 @@ academicSemisterSchema.pre('save', async function (next) {
   next();
 });
 
-export const AcademicSemisterModel = model<TAcademicSemister>(
+export const AcademicSemisterModel = model<TAcademicSemester>(
   'AcademicSemester',
-  academicSemisterSchema,
+  academicSemesterSchema,
 );

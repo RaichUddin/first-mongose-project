@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 
-import httpStatus from 'http-status';
 import catchAsync from '../../utilits/catchAsync';
 import sendResponse from '../../utilits/sendResponse';
 import { CourseServices } from './course.service';
+import httpStatus from 'http-status';
 
 const createCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.createCourseIntoDB(req.body);

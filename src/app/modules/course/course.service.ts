@@ -13,17 +13,19 @@ const createCourseIntoDB = async (payload: TCourse) => {
 };
 
 const getAllCoursesFromDB = async (query: Record<string, unknown>) => {
-  const courseQuery = new QueryBuilder(
-    Course.find().populate('preRequisiteCourses.course'),
-    query,
-  )
-    .search(CourseSearchableFields)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
+  //   const courseQuery = new QueryBuilder(
+  //     Course.find().populate('preRequisiteCourses.course'),
+  //     query,
+  //   )
+  //     .search(CourseSearchableFields)
+  //     .filter()
+  //     .sort()
+  //     .paginate()
+  //     .fields();
 
-  const result = await courseQuery.modelQuery;
+  //   const result = await courseQuery.modelQuery;
+  const result = await Course.find().populate('preRequisiteCourses.course');
+  console.log(result);
   return result;
 };
 

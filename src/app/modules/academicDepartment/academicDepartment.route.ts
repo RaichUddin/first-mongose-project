@@ -5,14 +5,16 @@ import express from 'express';
 import validateRequest from '../../middlewares/validateRequested';
 import { academicDepartmentValidations } from './academicDepartment.validation';
 import { academicDepartmentController } from './academicDepartment.controller';
+import auth from '../../middlewares/auth';
 
 const router = express.Router();
 
 router.post(
   '/create-academic-department',
-  // validateRequest(
-  //   academicDepartmentValidations.createDepartmentValidationSchema,
-  // ),
+  auth('admin', 'superAdmin'),
+  validateRequest(
+    academicDepartmentValidations.createDepartmentValidationSchema,
+  ),
   academicDepartmentController.createAcademicDepartment,
 );
 

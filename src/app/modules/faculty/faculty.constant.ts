@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { TBloodGroup, TGender } from './faculty.interface';
+import { TBloodGroup } from './faculty.interface';
 
-export const Gender: TGender[] = ['male', 'female', 'other'];
+export const Gender = ['Male', 'Female', 'Other'] as const;
 
 export const BloodGroup: TBloodGroup[] = [
   'A+',
