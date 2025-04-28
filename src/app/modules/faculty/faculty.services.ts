@@ -4,10 +4,11 @@ import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import QueryBuilder from '../../Builder/QueryBuilder';
 import AppError from '../../errors/appError';
-import { userModels } from '../user/user.model';
+
 import { FacultySearchableFields } from './faculty.constant';
 import { TFaculty } from './faculty.interface';
 import { Faculty } from './faculty.model';
+import { UserModel } from '../user/user.model';
 
 const createFacultyInDB = async (facultyData: TFaculty) => {
   const newFaculty = await Faculty.create(facultyData);
@@ -16,7 +17,7 @@ const createFacultyInDB = async (facultyData: TFaculty) => {
 
 const getAllFacultiesFromDB = async (query: Record<string, unknown>) => {
   const facultyQuery = new QueryBuilder(
-    Faculty.find().populate('academicDepartment'),
+    Faculty.find().populate('academicDepartment academicFaculty'),
     query,
   )
     .search(FacultySearchableFields)
@@ -75,7 +76,7 @@ const deleteFacultyFromDB = async (id: string) => {
     // get user _id from deletedFaculty
     const userId = deletedFaculty.user;
 
-    const deletedUser = await userModels.findByIdAndUpdate(
+    const deletedUser = await UserModel.findByIdAndUpdate(
       userId,
       { isDeleted: true },
       { new: true, session },

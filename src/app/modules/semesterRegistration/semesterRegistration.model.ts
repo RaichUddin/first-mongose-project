@@ -40,6 +40,6 @@ const SemesterRegistrationSchema = new mongoose.Schema<TSemesterRegistration>(
 
 // Create and export the Mongoose model
 export const SemesterRegistrationModel = mongoose.model<TSemesterRegistration>(
-  'SemesterRegistrations',
+  'SemesterRegistration',
   SemesterRegistrationSchema,
 );

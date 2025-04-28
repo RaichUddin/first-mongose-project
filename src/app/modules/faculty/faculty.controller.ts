@@ -27,7 +27,6 @@ const getSingleFaculty = catchAsync(async (req, res) => {
 });
 
 const getAllFaculties = catchAsync(async (req, res) => {
-  console.log(req.cookies);
   const result = await FacultyServices.getAllFacultiesFromDB(req.query);
   res.status(200).json({
     SUCCESS: true,

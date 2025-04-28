@@ -26,6 +26,16 @@ router.get(
   ),
   CourseControllers.getSingleCourse,
 );
+router.get(
+  '/:courseId/faculties',
+  auth(
+    USER_ROLE.superAdmin,
+    USER_ROLE.admin,
+    USER_ROLE.faculty,
+    USER_ROLE.student,
+  ),
+  CourseControllers.getFacultiesCourse,
+);
 
 router.patch(
   '/:id',

@@ -15,8 +15,7 @@ const createOfferedCourseValidationSchema = z.object({
   body: z
     .object({
       semesterRegistration: z.string(),
-
-      academicfaculty: z.string(),
+      academicFaculty: z.string(),
       academicDepartment: z.string(),
       faculty: z.string(),
       course: z.string(),

@@ -11,7 +11,7 @@ export default {
   bcrypt_salt: process.env.BCRYPT_SALT,
   jwt_secret: process.env.JWT_ACCESS_SECRET,
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
-  jwt_access_expires_in: process.env.JWT_ACCESS_EXPIRES_IN || '1d',
+  jwt_access_expires_in: process.env.JWT_ACCESS_EXPIRES_IN || '7d',
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN || '365d',
   reset_password_link: process.env.RESET_PASSWORD_LINK,
   cloud_name: process.env.CLOUD_NAME,

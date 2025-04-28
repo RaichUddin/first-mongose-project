@@ -25,13 +25,20 @@ const getAllCoursesFromDB = async (query: Record<string, unknown>) => {
 
   //   const result = await courseQuery.modelQuery;
   const result = await Course.find().populate('preRequisiteCourses.course');
-  console.log(result);
+
   return result;
 };
 
 const getSingleCourseFromDB = async (id: string) => {
   const result = await Course.findById(id).populate(
     'preRequisiteCourses.course',
+  );
+  return result;
+};
+
+const getFacultiesWithCourseFromDB = async (courseId: string) => {
+  const result = await CourseFaculty.findOne({ course: courseId }).populate(
+    'faculties',
   );
   return result;
 };
@@ -173,4 +180,5 @@ export const CourseServices = {
   deleteCourseFromDB,
   assignFacultiesWithCourseIntoDB,
   removeFacultiesFromCourseFromDB,
+  getFacultiesWithCourseFromDB,
 };

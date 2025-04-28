@@ -31,7 +31,13 @@ export const sendImageToCloudinary = (
         if (error) {
           reject(error);
         }
-        resolve(result);
+        if (error) {
+          reject(error);
+        } else if (result) {
+          resolve(result);
+        } else {
+          reject(new Error('Unexpected result from Cloudinary upload'));
+        }
         fs.unlink(path, (err) => {
           if (err) {
             console.error('Error deleting file:', err);
